@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="section-title">
+  <h2>{{ t('memo_title') }}</h2>
+  <p>{{ t('memo_add') }}</p>
+</section>
+
+<div class="two-col">
+  <section class="card">
+    <form method="post" class="form-grid">
+      <label>
+        <span>{{ t('memo_event') }}</span>
+        <input type="text" name="event" required>
+      </label>
+      <label>
+        <span>{{ t('memo_time') }}</span>
+        <input type="datetime-local" name="event_time" required>
+      </label>
+      <label>
+        <span>{{ t('memo_note') }}</span>
+        <textarea name="note" rows="4"></textarea>
+      </label>
+      <button class="btn btn-primary" type="submit">{{ t('memo_save') }}</button>
+    </form>
+  </section>
+
+  <section class="card">
+    {% if memos %}
+      <div class="list-stack">
+        {% for memo in memos %}
+          <article class="list-item">
+            <div>
+              <h3>{{ memo['event'] }}</h3>
+              <p class="muted">{{ memo['event_time'] }}</p>
+              {% if memo['note'] %}<p>{{ memo['note'] }}</p>{% endif %}
+            </div>
+            <form method="post" action="{{ url_for('memo.delete', memo_id=memo['id']) }}">
+              <button class="btn btn-ghost" type="submit">{{ t('memo_delete') }}</button>
+            </form>
+          </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p class="muted">{{ t('memo_empty') }}</p>
+    {% endif %}
+  </section>
+</div>
+{% endblock %}

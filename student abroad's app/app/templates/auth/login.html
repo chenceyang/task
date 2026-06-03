@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="auth-shell">
+  <div class="auth-card">
+    <h2>{{ t('login_title') }}</h2>
+    <form method="post" class="form-grid">
+      <label>
+        <span>{{ t('email') }}</span>
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        <span>{{ t('password') }}</span>
+        <input type="password" name="password" required>
+      </label>
+      <button class="btn btn-primary" type="submit">{{ t('submit_login') }}</button>
+    </form>
+  </div>
+</section>
+{% endblock %}
